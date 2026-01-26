@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CMPE322 — Software Architecture | Group 7</title>
+    <meta
+      name="description"
+      content="CMPE322 (Software Architecture) — Group 7 project website: team, reports, and links."
+    />
+    <style>
+      :root {
+        --bg: #0b1220;
+        --card: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.7);
+        --border: rgba(255, 255, 255, 0.12);
+        --accent: #7dd3fc;
+        --accent2: #a78bfa;
+        --shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+        --radius: 18px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 500px at 20% -10%, rgba(125, 211, 252, 0.25), transparent 60%),
+                    radial-gradient(900px 500px at 90% 10%, rgba(167, 139, 250, 0.18), transparent 60%),
+                    var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+      }
+
+      a { color: var(--accent); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .container {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        padding: 28px 0 70px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(11, 18, 32, 0.7);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        padding: 14px 0;
+        gap: 12px;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 220px;
+      }
+
+      .brand .title {
+        font-weight: 700;
+        letter-spacing: 0.2px;
+      }
+
+      .brand .subtitle {
+        font-size: 0.92rem;
+        color: var(--muted);
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .pill {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        padding: 9px 12px;
+        border-radius: 999px;
+        font-size: 0.95rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.08s ease, background 0.2s ease;
+      }
+
+      .pill:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+
+      .hero {
+        padding: 38px 0 22px;
+      }
+
+      .hero-card {
+        border: 1px solid var(--border);
+        background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+        border-radius: var(--radius);
+        padding: 26px;
+        box-shadow: var(--shadow);
+      }
+
+      .kicker {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin-bottom: 10px;
+      }
+
+      .badge {
+        border: 1px solid var(--border);
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+        letter-spacing: 0.2px;
+      }
+
+      .lead {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+        max-width: 72ch;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+        .brand { min-width: unset; }
+      }
+
+      section {
+        scroll-margin-top: 90px;
+        margin-top: 22px;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: var(--radius);
+        padding: 18px;
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+      }
+
+      .muted { color: var(--muted); }
+
+      .list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 12px;
+        border-radius: 14px;
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.12);
+      }
+
+      .row-left {
+        display: grid;
+        gap: 2px;
+      }
+
+      .row-title {
+        font-weight: 650;
+      }
+
+      .row-sub {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      .btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .icon {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .footer {
+        margin-top: 26px;
+        color: rgba(255,255,255,0.55);
+        font-size: 0.92rem;
+        text-align: center;
+      }
+
+      /* Simple “table” for team */
+      .team-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 700px) {
+        .team-grid { grid-template-columns: 1fr; }
+      }
+      .member {
+        border: 1px solid rgba(255,255,255,0.10);
+        background: rgba(0,0,0,0.12);
+        border-radius: 14px;
+        padding: 14px;
+      }
+      .member .name {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .member .role {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+      }
+      .member .links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="title">CMPE322 — Software Architecture</div>
+          <div class="subtitle">Group 7 • Project Website</div>
+        </div>
+
+        <nav class="nav-links" aria-label="Page navigation">
+          <a class="pill" href="#about">About</a>
+          <a class="pill" href="#reports">Reports</a>
+          <a class="pill" href="#links">Links</a>
+          <a class="pill" href="#team">Team</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="hero">
+        <div class="hero-card">
+          <div class="kicker">
+            <span class="badge">Winter 2026</span>
+            <span class="badge">Public + Always Available</span>
+            <span class="badge">GitHub Pages</span>
+          </div>
+
+          <h1>Group 7 — CMPE322 Project Hub</h1>
+          <p class="lead">
+            This page contains our team details, deliverables (reports + presentations), and links to the open-source project we’re analyzing.
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <h2 id="about">About</h2>
+              <p class="muted" style="margin:0;">
+                <strong>One-line project summary (edit me):</strong>
+                We are analyzing <em>[Open-source Project Name]</em> to understand its architecture, design decisions, and trade-offs across four phases.
+              </p>
+            </div>
+
+            <div class="card">
+              <h2>Quick Info</h2>
+              <div class="list">
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Course</div>
+                    <div class="row-sub">CMPE322 — Software Architecture</div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Group</div>
+                    <div class="row-sub">Group 7</div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Instructor / Section</div>
+                    <div class="row-sub">[Optional: add later]</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <section>
+            <div class="card" id="reports">
+              <h2>Reports & Presentations</h2>
+              <p class="muted" style="margin-top:0;">
+                Add your Google Doc / Google Slides links below (make sure sharing is set to “Anyone with the link can view”).
+              </p>
+
+              <div class="list" aria-label="Deliverables list">
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Phase 1 — Website + Initial Deliverable</div>
+                    <div class="row-sub">Report + Slides</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">
+                      <!-- Doc icon -->
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 3h7l3 3v15a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M14 3v4h4" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M8.5 12h7M8.5 15h7M8.5 18h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                      </svg>
+                      Report (Doc)
+                    </a>
+                    <a class="pill" href="#" target="_blank" rel="noopener">
+                      <!-- Slides icon -->
+                      <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 4h12a1 1 0 0 1 1 1v14H7a1 1 0 0 1-1-1V4Z" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M7 8h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <path d="M9 11h7v6H9v-6Z" stroke="currentColor" stroke-width="1.6"/>
+                      </svg>
+                      Slides
+                    </a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Phase 2 — [Title TBD]</div>
+                    <div class="row-sub">Report + Slides</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">Report (Doc)</a>
+                    <a class="pill" href="#" target="_blank" rel="noopener">Slides</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Phase 3 — [Title TBD]</div>
+                    <div class="row-sub">Report + Slides</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">Report (Doc)</a>
+                    <a class="pill" href="#" target="_blank" rel="noopener">Slides</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Phase 4 — [Title TBD]</div>
+                    <div class="row-sub">Report + Slides</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">Report (Doc)</a>
+                    <a class="pill" href="#" target="_blank" rel="noopener">Slides</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="card" id="links">
+              <h2>Project Links</h2>
+              <p class="muted" style="margin-top:0;">
+                Add links to the open-source project being analyzed, and your team’s repo (if you have one).
+              </p>
+
+              <div class="list">
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Open-Source Project</div>
+                    <div class="row-sub">Main repository / homepage</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">Project Repo</a>
+                    <a class="pill" href="#" target="_blank" rel="noopener">Project Docs</a>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="row-left">
+                    <div class="row-title">Team Repository (optional)</div>
+                    <div class="row-sub">Where we keep notes, diagrams, or code</div>
+                  </div>
+                  <div class="btns">
+                    <a class="pill" href="#" target="_blank" rel="noopener">Our Repo</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="card" id="team">
+              <h2>Meet the Team</h2>
+              <p class="muted" style="margin-top:0;">
+                Replace placeholders with real names + LinkedIn URLs.
+              </p>
+
+              <div class="team-grid">
+                <!-- Leader / Communications -->
+                <div class="member">
+                  <div class="name">[Student Name 1]</div>
+                  <div class="role">Leader / Communications</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <!-- Presentation -->
+                <div class="member">
+                  <div class="name">[Your Name]</div>
+                  <div class="role">Presentation</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <!-- Presentation -->
+                <div class="member">
+                  <div class="name">[Student Name 3]</div>
+                  <div class="role">Presentation</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <!-- Developers / Contributors -->
+                <div class="member">
+                  <div class="name">[Student Name 4]</div>
+                  <div class="role">Developer / Contributor</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <div class="member">
+                  <div class="name">[Student Name 5]</div>
+                  <div class="role">Developer / Contributor</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <div class="member">
+                  <div class="name">[Student Name 6]</div>
+                  <div class="role">Developer / Contributor</div>
+                  <div class="links">
+                    <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+                  </div>
+                </div>
+
+                <!-- Optional AI assistant -->
+                <!-- If you decide to include it, uncomment this block
+                <div class="member">
+                  <div class="name">AI Assistant</div>
+                  <div class="role">Support</div>
+                  <div class="links">
+                    <span class="muted">Used for brainstorming + drafting</span>
+                  </div>
+                </div>
+                -->
+              </div>
+            </div>
+          </section>
+
+          <div class="footer">
+            Last updated: <span id="lastUpdated">—</span> • CMPE322 Group 7
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Auto-fill last updated date (based on the viewer’s locale)
+      const el = document.getElementById("lastUpdated");
+      el.textContent = new Date().toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    </script>
+  </body>
+</html>
